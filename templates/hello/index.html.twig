@@ -3,7 +3,7 @@
 {% block body %}
 <div>
     {% if messages|length > 0 %}
-    {% for message in messages %}
+    {% for message in messages|slice(0, limit) %}
         <div> <i>{{ message }}</i> </div>
     {% endfor %}
     {% else %}
@@ -12,4 +12,4 @@
 </div> 
 {% endblock %}
 
-{% block title %}I have chnaged the title!{% endblock %}
+{% block title %}I have changed the title!{% endblock %}
