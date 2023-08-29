@@ -8,7 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
-    private array $messages = ['Hello', 'Hi', 'Bye!'];
+    private array $messages = [
+        ['message' => 'Hello', 'created' => '2023/06/12'],
+        ['message' => 'Hi', 'created' => '2023/04/12'],
+        ['message' => 'Bye!', 'created' => '2022/05/12']
+    ];
     
     #[Route('/{limit<\d+>?3}', name: 'app_index')]
     public function index(int $limit): Response
