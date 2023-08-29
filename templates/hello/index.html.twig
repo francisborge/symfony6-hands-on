@@ -3,9 +3,12 @@
 {% block body %}
 <div>
     {% if messages|length > 0 %}
-    {% for message in messages|slice(0, limit) %}
+    {% for key,message in messages|slice(0, limit) %}
         {#<div> <i>{{ message['message']}}</i> </div>#}
-        <div> <i>{{ message.message}}</i> </div>
+        <div>
+            {#<a href="/messages/{{key}}"> <i>{{ message.message}}</i></a> This is not a good practice#}
+            <a href="{{ path('app_show_one', {id: key}) }}"> <i>{{ message.message}}</i></a> 
+        </div>
         {{ include('/hello/_message.html.twig', {message: message}) }}
     {% endfor %}
     {% else %}
@@ -14,4 +17,4 @@
 </div> 
 {% endblock %}
 
-{% block title %}I have changed the title!{% endblock %}
+{% block title %}New title!{% endblock %}
