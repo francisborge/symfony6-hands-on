@@ -14,16 +14,20 @@ class MicroPostController extends AbstractController
     #[Route('/micro-post', name: 'app_micro_post')]
     public function index(MicroPostRepository $posts): Response
     {
-        //$microPost = new MicroPost();
-        //$microPost ->setTitle('It comes from the controller');
-        //$microPost ->setText('Hi!');
-        //$microPost ->setCreated(new DateTime());
-
-        $microPost = $posts->find(7);
-        $posts->remove($microPost, true);
-        // dd($posts->findBy(['title' => 'Welcome to US!']));
+        dd($posts->findAll());
         return $this->render('micro_post/index.html.twig', [
             'controller_name' => 'MicroPostController',
         ]);
     }
+    /*#[Route('/micro-post/{id}', name: 'app_micro_post_show')]
+    public function showOne($id, MicroPostRepository $posts): Response
+    {
+        dd($posts->find($id));
+    } This option produce more work*/ 
+
+    #[Route('/micro-post/{post}', name: 'app_micro_post_show')]
+    public function showOne(MicroPost $post): Response
+    {
+        dd($post);
+    }    
 }
