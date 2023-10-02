@@ -65,4 +65,32 @@ class MicroPostController extends AbstractController
             ]
         );
     }
+
+    #[Route('/micro-post/{post}/edit', name: 'app_micro_post_edit')]
+    public function edit(MicroPost $post, Request $request, MicroPostRepository $posts): Response
+    {
+        $form = $this->createFormBuilder($post)
+            ->add('title')
+            ->add('text')
+            ->getForm();
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post = $form->getData();
+            $posts->add($post, true);
+            #dd($post);
+            // Add a flash
+            $this->addFlash('success', 'Your micro post has been updated.');
+
+            return $this->redirectToRoute('app_micro_post'); //you can use an specific path with redirect(/micro-post/1/comments)
+            // Redirect
+        }
+
+        return $this->renderForm('micro_post/edit.html.twig', 
+            [
+                'form' => $form
+            ]
+        );
+    }    
 }
