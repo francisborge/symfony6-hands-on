@@ -19,7 +19,8 @@
     <div class="text-sm text-gray-500 dark:tex-gray-400">
         <a href="#">user@email.com</a>
     </div>
-    <div class="text-xl dark:tex-gray-400">
-        <a href="{{ path('app_micro_post_edit', {post: post.id}) }}">Edit</a>
+    <div class="flex">
+        <a href="{{ path('app_micro_post_edit', {post: post.id}) }}" class="mr-2">Edit</a>
+        <a href="{{ path('app_micro_post_comment', {post: post.id}) }}">Comment</a>
     </div>            
 </div>
