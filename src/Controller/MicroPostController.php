@@ -36,7 +36,7 @@ class MicroPostController extends AbstractController
     {
         #dd($post);
         return $this->render('micro_post/show.html.twig', [
-            'post' => $post,
+            'post' => $post
         ]);        
     }
 
@@ -84,7 +84,8 @@ class MicroPostController extends AbstractController
 
         return $this->renderForm('micro_post/edit.html.twig', 
             [
-                'form' => $form
+                'form' => $form,
+                'post' => $post
             ]
         );
     }
