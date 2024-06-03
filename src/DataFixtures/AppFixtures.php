@@ -13,8 +13,7 @@ class AppFixtures extends Fixture
 {
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasher
-    )
-    {
+    ) {
     }
     public function load(ObjectManager $manager): void
     {
