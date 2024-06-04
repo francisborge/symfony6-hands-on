@@ -33,12 +33,12 @@ class HelloController extends AbstractController
 
         //Option 2
         //This get the post and make an edition without addComment() and add()
-        $post = $posts->find(15);
+        //$post = $posts->find(2);
         //$post->getComments()->count(); //This show the content of comment array
 
-        $comment = $post->getComments()[0];
-        $post->removeComment($comment); //This remove the older record
-        $posts->add($post, true); //For this to work, then post needs to be saved
+        //$comment = $post->getComments()[0];
+        //$post->removeComment($comment); //This remove the older record
+        //$posts->add($post, true); //For this to work, then post needs to be saved
 
         //dd($post);
 
