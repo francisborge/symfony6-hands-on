@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class MicroPostController extends AbstractController
 {
     #[Route('/micro-post', name: 'app_micro_post')]
@@ -43,6 +42,7 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function add(Request $request, MicroPostRepository $posts): Response
     {
         //$this->isGranted();
@@ -55,7 +55,6 @@ class MicroPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
-            $post->setCreated(new DateTime());
             $post->setAuthor($this->getUser());
             $posts->add($post, true);
             #dd($post);
@@ -109,7 +108,7 @@ class MicroPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
             $comment->setPost($post);
-            $post->setAuthor($this->getUser());
+            $comment->setAuthor($this->getUser());
             $comments->add($comment, true);
 
             #dd($post);
