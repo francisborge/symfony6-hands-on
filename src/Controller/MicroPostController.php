@@ -22,9 +22,12 @@ class MicroPostController extends AbstractController
     public function index(MicroPostRepository $posts): Response
     {
         #dd($posts->findAll());
-        return $this->render('micro_post/index.html.twig', [
+        return $this->render(
+            'micro_post/index.html.twig', 
+            [
             'posts' => $posts->findAllWithComments(),
-        ]);
+            ]
+        );
     }
     /*#[Route('/micro-post/{id}', name: 'app_micro_post_show')]
     public function showOne($id, MicroPostRepository $posts): Response
@@ -37,9 +40,12 @@ class MicroPostController extends AbstractController
     public function showOne(MicroPost $post): Response
     {
         #dd($post);
-        return $this->render('micro_post/show.html.twig', [
+        return $this->render(
+            'micro_post/show.html.twig', 
+            [
             'post' => $post
-        ]);        
+            ]
+        );        
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
@@ -63,7 +69,10 @@ class MicroPostController extends AbstractController
             $posts->add($post, true);
             #dd($post);
             // Add a flash
-            $this->addFlash('success', 'Your micro post has been added.');
+            $this->addFlash(
+                'success', 
+                'Your micro post has been added.'
+            );
 
             return $this->redirectToRoute('app_micro_post'); //you can use an specific path with redirect(/micro-post/1/comments)
             // Redirect
@@ -93,7 +102,10 @@ class MicroPostController extends AbstractController
             $posts->add($post, true);
             #dd($post);
             // Add a flash
-            $this->addFlash('success', 'Your micro post has been updated.');
+            $this->addFlash(
+                'success',
+                'Your micro post has been updated.'
+            );
 
             return $this->redirectToRoute('app_micro_post'); //you can use an specific path with redirect(/micro-post/1/comments)
             // Redirect
@@ -109,9 +121,16 @@ class MicroPostController extends AbstractController
 
     #[Route('/micro-post/{post}/comment', name: 'app_micro_post_comment')]
     #[IsGranted('ROLE_COMMENTER')]
-    public function addComment(MicroPost $post, Request $request, CommentRepository $comments): Response
+    public function addComment(
+        MicroPost $post, 
+        Request $request, 
+        CommentRepository $comments
+        ): Response
     {
-        $form = $this->createForm(CommentType::class, new Comment());
+        $form = $this->createForm(
+            CommentType::class, 
+            new Comment()
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -122,7 +141,10 @@ class MicroPostController extends AbstractController
 
             #dd($post);
             // Add a flash
-            $this->addFlash('success', 'Your comment has been updated.');
+            $this->addFlash(
+                'success', 
+                'Your comment has been updated.'
+            );
 
             return $this->redirectToRoute(
                 'app_micro_post_show',
