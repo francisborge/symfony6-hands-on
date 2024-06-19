@@ -13,11 +13,18 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class EmailVerifier
 {
+    private VerifyEmailHelperInterface $verifyEmailHelper;
+    private MailerInterface $mailer;
+    private EntityManagerInterface $entityManager;
+
     public function __construct(
-        private VerifyEmailHelperInterface $verifyEmailHelper,
-        private MailerInterface $mailer,
-        private EntityManagerInterface $entityManager
-    ) {
+        VerifyEmailHelperInterface $helper, 
+        MailerInterface $mailer, 
+        EntityManagerInterface $manager)
+    {
+        $this->verifyEmailHelper = $helper;
+        $this->mailer = $mailer;
+        $this->entityManager = $manager;
     }
 
     /**
@@ -51,13 +58,10 @@ class EmailVerifier
      */
     public function handleEmailConfirmation(Request $request, User $user): void
     {
-        //$this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail()); //deprecated
-
-        $this->verifyEmailHelper->validateEmailConfirmationFromRequest(
-            $request, 
+        $this->verifyEmailHelper->validateEmailConfirmation(
+            $request->getUri(), 
             $user->getId(), 
-            $user->getEmail()
-        );
+            $user->getEmail()); //deprecated
 
         $user->setIsVerified(true);
 
