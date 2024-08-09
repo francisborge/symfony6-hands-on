@@ -18,17 +18,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MicroPostController extends AbstractController
 {
-    #[Route('/micro-post', name: 'app_micro_post')]
-    public function index(MicroPostRepository $posts): Response
-    {
-        #dd($posts->findAll());
-        return $this->render(
-            'micro_post/index.html.twig', 
-            [
-            'posts' => $posts->findAllWithComments(),
-            ]
-        );
-    }
+        #[Route('/micro-post', name: 'app_micro_post')]
+        public function index(MicroPostRepository $posts): Response
+        {
+            #dd($posts->findAll());
+            return $this->render(
+                'micro_post/index.html.twig', 
+                [
+                'posts' => $posts->findAllWithComments(),
+                ]
+            );
+        }
+
+        #[Route('/micro-post/top-liked', name: 'app_micro_post_topliked')]
+        public function topLiked(MicroPostRepository $posts): Response
+        {
+            return $this->render(
+                'micro_post/top_liked.html.twig', 
+                [
+                'posts' => $posts->findAllWithComments(),
+                ]
+            );
+        }
+
+        #[Route('/micro-post/follows', name: 'app_micro_post_follows')]
+        public function follows(MicroPostRepository $posts): Response
+        {
+            #dd($posts->findAll());
+            return $this->render(
+                'micro_post/follows.html.twig', 
+                [
+                'posts' => $posts->findAllWithComments(),
+                ]
+            );
+        }
+
     /*#[Route('/micro-post/{id}', name: 'app_micro_post_show')]
     public function showOne($id, MicroPostRepository $posts): Response
     {
