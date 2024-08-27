@@ -78,7 +78,7 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
-    #[IsGranted('ROLE_WRITER')]
+    #[IsGranted('ROLE_COMMENTER')]
     public function add(
         Request $request, 
         MicroPostRepository $posts
