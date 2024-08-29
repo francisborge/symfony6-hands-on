@@ -19,7 +19,7 @@ class ProfileImageType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024',
+                        'maxSize' => '1025000',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png'
