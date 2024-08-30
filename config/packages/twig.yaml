@@ -3,6 +3,8 @@ twig:
     #form_themes: ['bootstrap_5_layout.html.twig']
     form_themes:
         - 'form/fields.html.twig'
+    globals:
+        profiles: '%profiles%'
 
 when@test:
     twig:
