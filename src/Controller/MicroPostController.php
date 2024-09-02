@@ -65,7 +65,8 @@ class MicroPostController extends AbstractController
     } This option produce more work*/ 
 
     #[Route('/micro-post/{post}', name: 'app_micro_post_show')]
-    #[IsGranted(MicroPost::VIEW, 'post')]
+    // #[IsGranted(MicroPost::VIEW, 'post')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function showOne(MicroPost $post): Response
     {
         #dd($post);

@@ -37,6 +37,11 @@ class MicroPostVoter extends Voter
         // }
         $isAuth = $user instanceof UserInterface;
 
+        // If the user is anonymous, deny EDIT access
+        if (!$isAuth && $attribute === MicroPost::EDIT) {
+            return false;
+        }        
+
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
         }
