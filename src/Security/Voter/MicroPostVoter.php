@@ -27,7 +27,10 @@ class MicroPostVoter extends Voter
     /**
      * @param MicroPost $subject
      */
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(
+        string $attribute, 
+        mixed $subject, 
+        TokenInterface $token): bool
     {
         /** @var User $user */
         $user = $token->getUser();
@@ -58,7 +61,13 @@ class MicroPostVoter extends Voter
             case MicroPost::VIEW:
                 // logic to determine if the user can VIEW
                 // return true or false
-                return true;
+                if (!$subject->isExtraPrivacy()){
+                    return true;
+                }
+
+                return $isAuth &&
+                ($subject->getAuthor()->getId() === $user->getId()
+                    || $subject->getAuthor()->getFollows()->contains($user));
         }
 
         return false;
